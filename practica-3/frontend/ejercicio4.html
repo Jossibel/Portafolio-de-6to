@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ejercicio 4 · Cruce de vehículos</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/sincronizacion.css">
+</head>
+
+<body>
+
+    <div class="noise"></div>
+
+    <!-- CABECERA RETRO -->
+
+    <header class="topbar">
+
+        <div class="brand-block">
+            <div class="brand-symbol">SD</div>
+
+            <div>
+                <h1>SISTEMAS DISTRIBUIDOS</h1>
+                <p>Práctica 03 · Ejercicio 4 · Cruce de vehículos</p>
+            </div>
+        </div>
+
+        <a class="volver" href="index.html">← VOLVER AL INICIO</a>
+
+    </header>
+
+
+    <main class="contenedor">
+
+        <!-- ======================================== -->
+        <!-- 04 CRUCE DE VEHÍCULOS -->
+        <!-- ======================================== -->
+
+        <section class="module" id="puente">
+
+            <div class="module-heading">
+                <div class="module-number numero-amarillo">04</div>
+                <div class="module-title">
+                    <span class="eyebrow">MONITOR · LOCK + CONDITION</span>
+                    <h2>EJERCICIO 4 · CRUCE DE VEHÍCULOS</h2>
+                    <p>Varios autos pueden cruzar en el mismo sentido, nunca en sentidos opuestos.</p>
+                </div>
+                <div class="service-badge">
+                    <span class="service-light"></span>
+                    PUENTE-SERVICE
+                </div>
+            </div>
+
+            <div class="parking-dashboard">
+
+                <div class="parking-visual">
+                    <div class="panel-title">PUENTE</div>
+
+                    <div class="puente-escena">
+                        <div class="orilla">
+                            <small>VAN AL NORTE →</small>
+                            <div class="cola-autos" id="ptColaNorte"></div>
+                        </div>
+                        <div class="agua">
+                            <div class="tablero" id="ptTablero"></div>
+                        </div>
+                        <div class="orilla derecha">
+                            <small>← VAN AL SUR</small>
+                            <div class="cola-autos" id="ptColaSur"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-panel">
+                    <div class="panel-title">CONTROL PANEL</div>
+
+                    <div class="counter-grid">
+                        <div class="counter-card coral">
+                            <span class="counter-label">DIRECCIÓN</span>
+                            <span id="ptDireccion" class="counter-value texto">LIBRE</span>
+                        </div>
+                        <div class="counter-card teal">
+                            <span class="counter-label">NORTE / SUR</span>
+                            <span id="ptEnPuente" class="counter-value">0 / 0</span>
+                        </div>
+                        <div class="counter-card yellow">
+                            <span class="counter-label">CRUZARON</span>
+                            <span id="ptCruzaron" class="counter-value">0</span>
+                        </div>
+                        <div class="counter-card pink">
+                            <span class="counter-label">SENT. OPUESTOS</span>
+                            <span id="ptViolaciones" class="counter-value">0</span>
+                        </div>
+                    </div>
+
+                    <div class="sync-controles">
+                        <label>POLÍTICA
+                            <select id="ptPolitica">
+                                <option value="base">base (guía)</option>
+                                <option value="justa">justa (reto)</option>
+                            </select>
+                        </label>
+                        <label>ESCENARIO
+                            <select id="ptEscenario">
+                                <option value="mixto">mixto 6 / 6</option>
+                                <option value="inanicion">inanición 15 / 3</option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <div class="arcade-actions">
+                        <button id="ptIniciar" class="arcade-btn primary-btn">
+                            <span class="btn-icon">▶</span> INICIAR SIMULACIÓN
+                        </button>
+                        <button id="ptInanicion" class="arcade-btn secondary-btn">
+                            <span class="btn-icon">⚖</span> COMPARAR POLÍTICAS
+                        </button>
+                        <button id="ptRendimiento" class="arcade-btn secondary-btn">
+                            <span class="btn-icon">⏱</span> MEDIR RENDIMIENTO
+                        </button>
+                    </div>
+
+                    <div class="system-status">
+                        <div class="status-header"><span class="live-indicator"></span> LIVE STATUS</div>
+                        <div id="ptEstado" class="status-text">Esperando simulación</div>
+                        <div id="ptProgreso" class="loading-track"><div class="loading-bar"></div></div>
+                    </div>
+
+                    <div class="mini-terminal">
+                        <div class="terminal-header">
+                            <span></span><span></span><span></span>
+                            <strong>EVENT LOG</strong>
+                        </div>
+                        <div id="ptLog" class="terminal-body">
+                            <p><span>SYS</span> Sistema preparado.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="vehicle-section">
+                <div class="section-heading">
+                    <span>VERIFICACIÓN</span>
+                    <div class="pixel-line"></div>
+                </div>
+                <div class="verificacion" id="ptVerificacion">
+                    Inicia la simulación para ver si se cumple el criterio: nunca hay autos en sentidos opuestos a la vez.
+                </div>
+                <table class="tabla-sync" id="ptTablaInanicion" hidden>
+                    <thead><tr><th>Política</th><th>Espera máx. sur (ms)</th><th>Espera máx. norte (ms)</th><th>Cambios de dirección</th><th>Tiempo total (ms)</th><th>Sent. opuestos</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+                <table class="tabla-sync" id="ptTablaRend" hidden>
+                    <thead><tr><th>Repetición</th><th>Secuencial (ms)</th><th>Concurrente (ms)</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer class="footer">
+
+        <span>
+            UNIVERSIDAD NACIONAL DE LOJA
+        </span>
+
+        <span>
+            SISTEMAS DISTRIBUIDOS · 2026
+        </span>
+
+    </footer>
+
+
+    <script type="module" src="js/puente.js"></script>
+
+</body>
+</html>

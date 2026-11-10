@@ -1,0 +1,282 @@
+/* =====================================
+   MODULOS 03 Y 04 (Jossibel)
+   usa las variables y clases de styles.css
+===================================== */
+
+.module + .module,
+.module + .other-modules {
+    margin-top: 40px;
+}
+
+.numero-teal { background: var(--teal); }
+.numero-amarillo { background: var(--yellow); color: var(--ink); }
+
+/* controles */
+.sync-controles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 18px 0;
+}
+
+.sync-controles label {
+    display: flex;
+    flex-direction: column;
+    font-family: "DM Mono";
+    font-size: 11px;
+    gap: 4px;
+}
+
+.sync-controles input,
+.sync-controles select {
+    border: 2px solid var(--border);
+    background: var(--paper);
+    padding: 7px;
+    font-family: "DM Mono";
+    font-size: 13px;
+    color: var(--ink);
+}
+
+.sync-controles .completo { grid-column: 1 / -1; }
+
+.sync-presets {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    grid-column: 1 / -1;
+}
+
+.sync-presets button {
+    border: 2px solid var(--border);
+    background: var(--paper);
+    font-family: "DM Mono";
+    font-size: 11px;
+    padding: 5px 8px;
+    cursor: pointer;
+}
+
+.sync-presets button:hover { background: var(--yellow); }
+
+.arcade-btn:disabled { opacity: .55; cursor: wait; }
+
+/* ---------- 03 fabrica ---------- */
+.fila-actores {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.actor {
+    border: 3px solid var(--border);
+    background: var(--paper);
+    padding: 10px 12px;
+    font-family: "DM Mono";
+    font-size: 12px;
+}
+
+.actor b { display: block; font-size: 13px; }
+.actor small { color: var(--ink-soft); }
+.actor.productor { border-left: 10px solid var(--blue); }
+.actor.consumidor { border-left: 10px solid var(--coral); }
+.actor.espera { background: #f8e6b8; }
+.actor.trabajando { background: #d9f2de; }
+.actor.bloqueado { background: #f7c9c3; }
+.actor.terminado { opacity: .55; }
+
+.flecha {
+    text-align: center;
+    font-family: "DM Mono";
+    font-size: 11px;
+    margin: 10px 0;
+    color: var(--ink-soft);
+}
+
+.almacen-linea {
+    border: 3px solid var(--border);
+    background: var(--teal);
+    padding: 14px;
+}
+
+.almacen-cabecera {
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    font-family: "DM Mono";
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.almacen-ranuras {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
+.ranura {
+    height: 70px;
+    border: 2px dashed rgba(255, 255, 255, .8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ranura.desborde {
+    border-color: var(--coral);
+    background: rgba(239, 111, 97, .35);
+}
+
+.caja {
+    width: 70%;
+    height: 70%;
+    border: 3px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "DM Mono";
+    font-weight: bold;
+    font-size: 13px;
+    color: var(--ink);
+}
+
+.caja.P1 { background: var(--yellow); }
+.caja.P2 { background: var(--pink); color: white; }
+.caja.nueva { animation: cajaEntra .3s; }
+
+@keyframes cajaEntra {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* ---------- 04 puente ---------- */
+.puente-escena {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    border: 3px solid var(--border);
+    min-height: 210px;
+}
+
+.orilla {
+    background: var(--green);
+    padding: 10px;
+}
+
+.orilla.derecha { text-align: right; }
+
+.orilla small {
+    font-family: "DM Mono";
+    font-size: 10px;
+    color: var(--ink);
+}
+
+.cola-autos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 6px;
+}
+
+.orilla.derecha .cola-autos { justify-content: flex-end; }
+
+.agua {
+    position: relative;
+    background: var(--blue);
+}
+
+.tablero {
+    position: absolute;
+    top: 35px;
+    bottom: 35px;
+    left: 0;
+    right: 0;
+    background: #444c4f;
+    border-top: 4px solid var(--yellow);
+    border-bottom: 4px solid var(--yellow);
+}
+
+.auto {
+    display: inline-block;
+    width: 44px;
+    text-align: center;
+    padding: 3px 0;
+    border: 2px solid var(--border);
+    font-family: "DM Mono";
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.auto.NORTE { background: var(--yellow); }
+.auto.SUR { background: var(--coral); color: white; }
+.auto.esperando { animation: parpadeo .8s infinite; }
+
+@keyframes parpadeo { 50% { opacity: .35; } }
+
+.tablero .auto { position: absolute; }
+.cruza-NORTE { animation: haciaNorte linear forwards; }
+.cruza-SUR { animation: haciaSur linear forwards; }
+
+@keyframes haciaNorte { from { left: 3px; } to { left: calc(100% - 48px); } }
+@keyframes haciaSur { from { left: calc(100% - 48px); } to { left: 3px; } }
+
+.counter-value.texto { font-size: 22px; }
+
+/* ---------- verificacion ---------- */
+.verificacion {
+    border: 3px dashed var(--border);
+    padding: 16px;
+    font-family: "DM Mono";
+    font-size: 12px;
+}
+
+.verificacion ul { list-style: none; padding: 0; margin: 8px 0 0; }
+.verificacion li { margin: 4px 0; }
+.verificacion .si { color: var(--teal); font-weight: bold; }
+.verificacion .no { color: var(--coral); font-weight: bold; }
+
+.tabla-sync {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+    font-family: "DM Mono";
+    font-size: 12px;
+    background: var(--paper);
+}
+
+.tabla-sync th {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 8px;
+    text-align: left;
+}
+
+.tabla-sync td {
+    border: 2px solid var(--border);
+    padding: 7px 8px;
+}
+
+@media (max-width: 950px) {
+    .puente-escena { grid-template-columns: 1fr; }
+    .agua { min-height: 140px; }
+    .tabla-sync { display: block; overflow-x: auto; }
+}
+
+#productor-consumidor .parking-visual,
+#puente .parking-visual {
+    align-self: start;
+}
+
+#puente .puente-escena { min-height: 260px; }
+
+/* paginas separadas de cada ejercicio */
+.volver {
+    font-family: "DM Mono";
+    font-size: 12px;
+    color: var(--ink);
+    border: 2px solid var(--border);
+    background: var(--yellow);
+    padding: 8px 12px;
+    text-decoration: none;
+}
+
+.volver:hover { background: var(--coral); color: white; }
+
+.contenedor > .module:first-child { margin-top: 40px; }

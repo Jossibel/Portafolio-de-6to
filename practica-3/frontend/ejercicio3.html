@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ejercicio 3 · Productor-Consumidor</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/sincronizacion.css">
+</head>
+
+<body>
+
+    <div class="noise"></div>
+
+    <!-- CABECERA RETRO -->
+
+    <header class="topbar">
+
+        <div class="brand-block">
+            <div class="brand-symbol">SD</div>
+
+            <div>
+                <h1>SISTEMAS DISTRIBUIDOS</h1>
+                <p>Práctica 03 · Ejercicio 3 · Productor-Consumidor</p>
+            </div>
+        </div>
+
+        <a class="volver" href="index.html">← VOLVER AL INICIO</a>
+
+    </header>
+
+
+    <main class="contenedor">
+
+        <!-- ======================================== -->
+        <!-- 03 PRODUCTOR / CONSUMIDOR -->
+        <!-- ======================================== -->
+
+        <section class="module" id="productor-consumidor">
+
+            <div class="module-heading">
+                <div class="module-number numero-teal">03</div>
+                <div class="module-title">
+                    <span class="eyebrow">SEMÁFOROS + MUTEX</span>
+                    <h2>EJERCICIO 3 · PRODUCTOR / CONSUMIDOR</h2>
+                    <p>Almacén de 5 piezas compartido por 2 productores y 2 consumidores.</p>
+                </div>
+                <div class="service-badge">
+                    <span class="service-light"></span>
+                    FABRICA-SERVICE
+                </div>
+            </div>
+
+            <div class="parking-dashboard">
+
+                <div class="parking-visual">
+                    <div class="panel-title">LÍNEA DE PRODUCCIÓN</div>
+
+                    <div class="fila-actores" id="pcProductores"></div>
+                    <div class="flecha">▼ insertar · wait(espacios) ▼</div>
+
+                    <div class="almacen-linea">
+                        <div class="almacen-cabecera">
+                            <span>ALMACÉN</span>
+                            <span id="pcOcupacion">0 / 5</span>
+                        </div>
+                        <div class="almacen-ranuras" id="pcAlmacen"></div>
+                    </div>
+
+                    <div class="flecha">▼ extraer · wait(elementos) ▼</div>
+                    <div class="fila-actores" id="pcConsumidores"></div>
+                </div>
+
+                <div class="control-panel">
+                    <div class="panel-title">CONTROL PANEL</div>
+
+                    <div class="counter-grid">
+                        <div class="counter-card coral">
+                            <span class="counter-label">PRODUCIDAS</span>
+                            <span id="pcProducidas" class="counter-value">0</span>
+                        </div>
+                        <div class="counter-card teal">
+                            <span class="counter-label">CONSUMIDAS</span>
+                            <span id="pcConsumidas" class="counter-value">0</span>
+                        </div>
+                        <div class="counter-card yellow">
+                            <span class="counter-label">OCUPACIÓN MÁX.</span>
+                            <span id="pcMaxima" class="counter-value">0</span>
+                        </div>
+                        <div class="counter-card pink">
+                            <span class="counter-label">TIEMPO (MS)</span>
+                            <span id="pcTiempo" class="counter-value">-</span>
+                        </div>
+                    </div>
+
+                    <div class="sync-controles">
+                        <label>ESPACIOS <input type="number" id="pcEspacios" value="5" min="0" max="50"></label>
+                        <label>ELEMENTOS <input type="number" id="pcElementos" value="0" min="0" max="50"></label>
+                        <label class="completo">MODO
+                            <select id="pcModo">
+                                <option value="concurrente">concurrente (hilos)</option>
+                                <option value="secuencial">secuencial (un hilo)</option>
+                            </select>
+                        </label>
+                        <div class="sync-presets">
+                            <button data-pc="5,0">GUÍA 5/0</button>
+                            <button data-pc="0,0">ESPACIOS=0</button>
+                            <button data-pc="5,5">ELEMENTOS=5</button>
+                        </div>
+                    </div>
+
+                    <div class="arcade-actions">
+                        <button id="pcIniciar" class="arcade-btn primary-btn">
+                            <span class="btn-icon">▶</span> INICIAR SIMULACIÓN
+                        </button>
+                        <button id="pcRendimiento" class="arcade-btn secondary-btn">
+                            <span class="btn-icon">⏱</span> MEDIR RENDIMIENTO
+                        </button>
+                    </div>
+
+                    <div class="system-status">
+                        <div class="status-header"><span class="live-indicator"></span> LIVE STATUS</div>
+                        <div id="pcEstado" class="status-text">Esperando simulación</div>
+                        <div id="pcProgreso" class="loading-track"><div class="loading-bar"></div></div>
+                    </div>
+
+                    <div class="mini-terminal">
+                        <div class="terminal-header">
+                            <span></span><span></span><span></span>
+                            <strong>EVENT LOG</strong>
+                        </div>
+                        <div id="pcLog" class="terminal-body">
+                            <p><span>SYS</span> Sistema preparado.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="vehicle-section">
+                <div class="section-heading">
+                    <span>VERIFICACIÓN</span>
+                    <div class="pixel-line"></div>
+                </div>
+                <div class="verificacion" id="pcVerificacion">
+                    Inicia la simulación para ver si se cumple el criterio: el almacén nunca supera 5 y todas las piezas se consumen.
+                </div>
+                <table class="tabla-sync" id="pcTablaRend" hidden>
+                    <thead><tr><th>Repetición</th><th>Secuencial (ms)</th><th>Concurrente (ms)</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer class="footer">
+
+        <span>
+            UNIVERSIDAD NACIONAL DE LOJA
+        </span>
+
+        <span>
+            SISTEMAS DISTRIBUIDOS · 2026
+        </span>
+
+    </footer>
+
+
+    <script type="module" src="js/fabrica.js"></script>
+
+</body>
+</html>

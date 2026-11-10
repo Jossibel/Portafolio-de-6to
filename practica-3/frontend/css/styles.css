@@ -1,0 +1,2196 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+
+:root {
+
+    --cream: #f5ead7;
+    --paper: #fff8e8;
+
+    --ink: #172c33;
+    --ink-soft: #294951;
+
+    --blue: #22577a;
+
+    --teal: #2a9d8f;
+    --coral: #ef6f61;
+    --yellow: #e9c46a;
+    --pink: #d66ba0;
+
+    --green: #68b684;
+
+    --border: #193840;
+
+    --shadow: 7px 7px 0 #193840;
+
+    --radius: 6px;
+}
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+
+    background:
+        linear-gradient(
+            rgba(34, 87, 122, .035) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(34, 87, 122, .035) 1px,
+            transparent 1px
+        ),
+        var(--cream);
+
+    background-size: 24px 24px;
+
+    font-family:
+        "Space Grotesk",
+        sans-serif;
+
+    color: var(--ink);
+
+    overflow-x: hidden;
+
+}
+
+
+/* textura tipo papel */
+
+.noise {
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    opacity: .25;
+
+    z-index: 999;
+
+    background-image:
+        repeating-radial-gradient(
+            circle at 20% 20%,
+            rgba(0,0,0,.06) 0,
+            transparent 1px,
+            transparent 4px
+        );
+
+    mix-blend-mode: multiply;
+
+}
+
+
+/* =====================================
+   HEADER
+===================================== */
+
+.topbar {
+
+    background:
+        var(--paper);
+
+    border-bottom:
+        4px solid var(--border);
+
+    padding:
+        20px 7%;
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+
+}
+
+
+.brand-block {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        15px;
+
+}
+
+
+.brand-symbol {
+
+    width:
+        58px;
+
+    height:
+        58px;
+
+    background:
+        var(--coral);
+
+    color:
+        white;
+
+    display:
+        grid;
+
+    place-items:
+        center;
+
+    font-family:
+        "DM Mono";
+
+    font-weight:
+        700;
+
+    font-size:
+        20px;
+
+    border:
+        3px solid var(--border);
+
+    box-shadow:
+        4px 4px 0 var(--border);
+
+}
+
+
+.brand-block h1 {
+
+    font-size:
+        20px;
+
+    letter-spacing:
+        .06em;
+
+}
+
+
+.brand-block p {
+
+    margin-top:
+        4px;
+
+    font-family:
+        "DM Mono";
+
+    font-size:
+        12px;
+
+    color:
+        var(--ink-soft);
+
+}
+
+
+.topbar-status {
+
+    font-family:
+        "DM Mono";
+
+    font-size:
+        12px;
+
+    border:
+        2px solid var(--border);
+
+    padding:
+        10px 14px;
+
+    background:
+        var(--yellow);
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        8px;
+
+}
+
+
+.status-dot {
+
+    width:
+        9px;
+
+    height:
+        9px;
+
+    background:
+        var(--green);
+
+    border-radius:
+        50%;
+
+    animation:
+        blinkStatus 1s infinite;
+
+}
+
+
+@keyframes blinkStatus {
+
+    50% {
+
+        opacity:
+            .2;
+
+    }
+
+}
+
+
+/* =====================================
+   HERO
+===================================== */
+
+.hero {
+
+    min-height:
+        330px;
+
+    background:
+        var(--blue);
+
+    color:
+        var(--paper);
+
+    border-bottom:
+        4px solid var(--border);
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1.25fr 1fr;
+
+    align-items:
+        center;
+
+    padding:
+        55px 8%;
+
+    position:
+        relative;
+
+    overflow:
+        hidden;
+
+}
+
+
+.hero::after {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    right:
+        -100px;
+
+    top:
+        -100px;
+
+    width:
+        360px;
+
+    height:
+        360px;
+
+    border:
+        50px solid rgba(255,255,255,.08);
+
+    border-radius:
+        50%;
+
+}
+
+
+.hero-label {
+
+    font-family:
+        "DM Mono";
+
+    font-size:
+        12px;
+
+    color:
+        var(--yellow);
+
+    letter-spacing:
+        .15em;
+
+}
+
+
+.hero h2 {
+
+    margin-top:
+        14px;
+
+    font-size:
+        clamp(
+            35px,
+            5vw,
+            60px
+        );
+
+    line-height:
+        .97;
+
+    letter-spacing:
+        -.05em;
+
+}
+
+
+.hero-copy p {
+
+    max-width:
+        650px;
+
+    margin-top:
+        22px;
+
+    color:
+        #dce8ea;
+
+    line-height:
+        1.65;
+
+}
+
+
+.arcade-screen {
+
+    position:
+        relative;
+
+    z-index:
+        2;
+
+    background:
+        #183940;
+
+    border:
+        6px solid var(--paper);
+
+    outline:
+        4px solid var(--border);
+
+    box-shadow:
+        10px 10px 0 rgba(0,0,0,.25);
+
+    padding:
+        25px;
+
+    font-family:
+        "DM Mono";
+
+    color:
+        #8df3c4;
+
+    transform:
+        rotate(2deg);
+
+}
+
+
+.screen-title {
+
+    color:
+        var(--yellow);
+
+    margin-bottom:
+        20px;
+
+}
+
+
+.screen-line {
+
+    margin-bottom:
+        9px;
+
+    font-size:
+        13px;
+
+}
+
+
+.blinking {
+
+    animation:
+        blinkText .8s infinite;
+
+}
+
+
+@keyframes blinkText {
+
+    50% {
+
+        opacity:
+            .25;
+
+    }
+
+}
+
+
+/* =====================================
+   CONTENEDOR
+===================================== */
+
+.contenedor {
+
+    width:
+        min(
+            1250px,
+            91%
+        );
+
+    margin:
+        55px auto;
+
+}
+
+
+/* =====================================
+   MODULO
+===================================== */
+
+.module {
+
+    background:
+        var(--paper);
+
+    border:
+        3px solid var(--border);
+
+    box-shadow:
+        var(--shadow);
+
+    padding:
+        30px;
+
+}
+
+
+.module-heading {
+
+    display:
+        flex;
+
+    align-items:
+        flex-start;
+
+    gap:
+        18px;
+
+    margin-bottom:
+        30px;
+
+}
+
+
+.module-number {
+
+    background:
+        var(--coral);
+
+    color:
+        white;
+
+    border:
+        3px solid var(--border);
+
+    padding:
+        8px 12px;
+
+    font-family:
+        "DM Mono";
+
+    font-size:
+        14px;
+
+}
+
+
+.module-title {
+
+    flex:
+        1;
+
+}
+
+
+.eyebrow {
+
+    font-family:
+        "DM Mono";
+
+    font-size:
+        11px;
+
+    color:
+        var(--teal);
+
+}
+
+
+.module-title h2 {
+
+    font-size:
+        31px;
+
+    margin-top:
+        5px;
+
+    letter-spacing:
+        -.04em;
+
+}
+
+
+.module-title p {
+
+    color:
+        var(--ink-soft);
+
+    margin-top:
+        5px;
+
+}
+
+
+.service-badge {
+
+    font-family:
+        "DM Mono";
+
+    font-size:
+        11px;
+
+    padding:
+        9px 12px;
+
+    border:
+        2px solid var(--border);
+
+    background:
+        #d9f2de;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        8px;
+
+}
+
+
+.service-light {
+
+    width:
+        8px;
+
+    height:
+        8px;
+
+    background:
+        var(--green);
+
+    border-radius:
+        50%;
+
+    animation:
+        livePulse 1.2s infinite;
+
+}
+
+
+@keyframes livePulse {
+
+    50% {
+
+        transform:
+            scale(1.8);
+
+        opacity:
+            .4;
+
+    }
+
+}
+
+
+/* =====================================
+   DASHBOARD
+===================================== */
+
+.parking-dashboard {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1.45fr .8fr;
+
+    gap:
+        28px;
+
+}
+
+
+.parking-visual,
+.control-panel {
+
+    border:
+        3px solid var(--border);
+
+    padding:
+        20px;
+
+    background:
+        #fef4dc;
+
+}
+
+
+.panel-title {
+
+    font-family:
+        "DM Mono";
+
+    font-size:
+        12px;
+
+    margin-bottom:
+        15px;
+
+    letter-spacing:
+        .12em;
+
+}
+
+
+/* =====================================
+   CARRETERA
+===================================== */
+
+.road {
+
+    height:
+        95px;
+
+    background:
+        #4b5254;
+
+    border:
+        3px solid var(--border);
+
+    position:
+        relative;
+
+    overflow:
+        hidden;
+
+    margin-bottom:
+        18px;
+
+}
+
+
+.road::after {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    bottom:
+        12px;
+
+    left:
+        0;
+
+    width:
+        200%;
+
+    height:
+        5px;
+
+    background:
+        repeating-linear-gradient(
+            90deg,
+            var(--yellow) 0,
+            var(--yellow) 35px,
+            transparent 35px,
+            transparent 65px
+        );
+
+    animation:
+        roadMove 1.2s linear infinite;
+
+}
+
+
+@keyframes roadMove {
+
+    from {
+        transform:
+            translateX(0);
+    }
+
+    to {
+        transform:
+            translateX(-65px);
+    }
+
+}
+
+
+.road-sign {
+
+    position:
+        absolute;
+
+    right:
+        12px;
+
+    top:
+        10px;
+
+    background:
+        var(--yellow);
+
+    color:
+        var(--ink);
+
+    border:
+        2px solid var(--border);
+
+    padding:
+        6px 8px;
+
+    font-family:
+        "DM Mono";
+
+    font-size:
+        10px;
+
+}
+
+
+/* CARRO CSS */
+
+.moving-car {
+
+    position:
+        absolute;
+
+    width:
+        70px;
+
+    height:
+        30px;
+
+    background:
+        var(--coral);
+
+    border:
+        3px solid var(--border);
+
+    bottom:
+        28px;
+
+    left:
+        -100px;
+
+    z-index:
+        10;
+
+}
+
+
+.moving-car::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    width:
+        36px;
+
+    height:
+        20px;
+
+    top:
+        -20px;
+
+    left:
+        14px;
+
+    background:
+        var(--coral);
+
+    border:
+        3px solid var(--border);
+
+    border-bottom:
+        none;
+
+}
+
+
+.car-window {
+
+    position:
+        absolute;
+
+    width:
+        22px;
+
+    height:
+        13px;
+
+    top:
+        -15px;
+
+    left:
+        21px;
+
+    background:
+        #b8dfea;
+
+    z-index:
+        2;
+
+}
+
+
+.car-wheel {
+
+    position:
+        absolute;
+
+    width:
+        15px;
+
+    height:
+        15px;
+
+    background:
+        var(--ink);
+
+    border-radius:
+        50%;
+
+    bottom:
+        -9px;
+
+    animation:
+        wheelSpin .4s linear infinite;
+
+}
+
+
+.wheel-left {
+    left: 8px;
+}
+
+
+.wheel-right {
+    right: 8px;
+}
+
+
+@keyframes wheelSpin {
+
+    to {
+
+        transform:
+            rotate(360deg);
+
+    }
+
+}
+
+
+.moving-car.driving {
+
+    animation:
+        carDrive 1.2s ease-in-out forwards;
+
+}
+
+
+@keyframes carDrive {
+
+    0% {
+        left:
+            -100px;
+    }
+
+    60% {
+        left:
+            55%;
+    }
+
+    100% {
+        left:
+            110%;
+    }
+
+}
+
+
+.hidden {
+    display:
+        none;
+}
+
+
+/* =====================================
+   ESTACIONAMIENTO
+===================================== */
+
+.parking-lot {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap:
+        10px;
+
+    background:
+        var(--teal);
+
+    padding:
+        14px;
+
+    border:
+        3px solid var(--border);
+
+}
+
+
+.parking-slot {
+
+    min-height:
+        135px;
+
+    background:
+        rgba(255,255,255,.18);
+
+    border:
+        3px dashed #f8f3dc;
+
+    position:
+        relative;
+
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    align-items:
+        center;
+
+    overflow:
+        hidden;
+
+}
+
+
+.slot-number {
+
+    position:
+        absolute;
+
+    top:
+        7px;
+
+    left:
+        7px;
+
+    font-family:
+        "DM Mono";
+
+    color:
+        white;
+
+    font-size:
+        11px;
+
+}
+
+
+.slot-car {
+
+    width:
+        72px;
+
+    height:
+        32px;
+
+    background:
+        var(--yellow);
+
+    border:
+        3px solid var(--border);
+
+    position:
+        relative;
+
+    animation:
+        parkCar .45s cubic-bezier(.3,1.4,.6,1);
+
+}
+
+
+.slot-car::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    width:
+        38px;
+
+    height:
+        20px;
+
+    background:
+        var(--yellow);
+
+    border:
+        3px solid var(--border);
+
+    border-bottom:
+        none;
+
+    left:
+        14px;
+
+    top:
+        -20px;
+
+}
+
+
+.slot-car::after {
+
+    content:
+        attr(data-id);
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    display:
+        grid;
+
+    place-items:
+        center;
+
+    font-family:
+        "DM Mono";
+
+    font-size:
+        11px;
+
+    font-weight:
+        bold;
+
+}
+
+
+@keyframes parkCar {
+
+    from {
+
+        transform:
+            translateY(-100px)
+            rotate(-10deg);
+
+        opacity:
+            0;
+
+    }
+
+    to {
+
+        transform:
+            translateY(0)
+            rotate(0);
+
+        opacity:
+            1;
+
+    }
+
+}
+
+
+/* =====================================
+   COLA
+===================================== */
+
+.queue-area {
+
+    margin-top:
+        18px;
+
+}
+
+
+.queue-label {
+
+    font-family:
+        "DM Mono";
+
+    font-size:
+        11px;
+
+    margin-bottom:
+        8px;
+
+}
+
+
+.queue-track {
+
+    min-height:
+        75px;
+
+    border:
+        3px solid var(--border);
+
+    background:
+        #4b5254;
+
+    padding:
+        13px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        13px;
+
+    overflow-x:
+        auto;
+
+}
+
+
+.queue-car {
+
+    min-width:
+        58px;
+
+    height:
+        28px;
+
+    background:
+        var(--pink);
+
+    border:
+        3px solid var(--border);
+
+    color:
+        white;
+
+    display:
+        grid;
+
+    place-items:
+        center;
+
+    font-family:
+        "DM Mono";
+
+    font-size:
+        10px;
+
+    animation:
+        queueBounce 1.2s ease-in-out infinite;
+
+}
+
+
+.queue-car:nth-child(2n) {
+    animation-delay:
+        .2s;
+}
+
+
+.queue-car:nth-child(3n) {
+    animation-delay:
+        .4s;
+}
+
+
+@keyframes queueBounce {
+
+    50% {
+
+        transform:
+            translateY(-6px);
+
+    }
+
+}
+
+
+.queue-empty {
+
+    color:
+        #e8e6d9;
+
+    font-family:
+        "DM Mono";
+
+    font-size:
+        11px;
+
+}
+
+
+/* =====================================
+   CONTROL PANEL
+===================================== */
+
+.counter-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:
+        10px;
+
+}
+
+
+.counter-card {
+
+    border:
+        3px solid var(--border);
+
+    padding:
+        16px;
+
+    box-shadow:
+        4px 4px 0 var(--border);
+
+}
+
+
+.counter-card.coral {
+    background:
+        #f4a499;
+}
+
+
+.counter-card.teal {
+    background:
+        #7fc9bd;
+}
+
+
+.counter-card.yellow {
+    background:
+        #efd687;
+}
+
+
+.counter-card.pink {
+    background:
+        #e7a6c7;
+}
+
+
+.counter-label {
+
+    display:
+        block;
+
+    font-family:
+        "DM Mono";
+
+    font-size:
+        10px;
+
+}
+
+
+.counter-value {
+
+    display:
+        block;
+
+    font-size:
+        35px;
+
+    font-weight:
+        700;
+
+    margin-top:
+        7px;
+
+}
+
+
+.counter-value.bump {
+
+    animation:
+        counterBump .3s ease;
+
+}
+
+
+@keyframes counterBump {
+
+    50% {
+
+        transform:
+            scale(1.35)
+            rotate(-3deg);
+
+    }
+
+}
+
+
+/* BOTONES */
+
+.arcade-actions {
+
+    display:
+        grid;
+
+    gap:
+        10px;
+
+    margin-top:
+        20px;
+
+}
+
+
+.arcade-btn {
+
+    border:
+        3px solid var(--border);
+
+    padding:
+        14px;
+
+    font-family:
+        "DM Mono";
+
+    font-weight:
+        600;
+
+    cursor:
+        pointer;
+
+    box-shadow:
+        4px 4px 0 var(--border);
+
+    transition:
+        transform .12s,
+        box-shadow .12s;
+
+}
+
+
+.arcade-btn:hover {
+
+    transform:
+        translate(-2px, -2px);
+
+    box-shadow:
+        7px 7px 0 var(--border);
+
+}
+
+
+.arcade-btn:active {
+
+    transform:
+        translate(4px, 4px);
+
+    box-shadow:
+        0 0 0 var(--border);
+
+}
+
+
+.arcade-btn:disabled {
+
+    opacity:
+        .55;
+
+    cursor:
+        not-allowed;
+
+}
+
+
+.primary-btn {
+
+    background:
+        var(--coral);
+
+    color:
+        white;
+
+}
+
+
+.secondary-btn {
+
+    background:
+        var(--yellow);
+
+    color:
+        var(--ink);
+
+}
+
+
+.btn-icon {
+
+    margin-right:
+        10px;
+
+}
+
+
+/* STATUS */
+
+.system-status {
+
+    margin-top:
+        20px;
+
+    border:
+        3px solid var(--border);
+
+    padding:
+        14px;
+
+    background:
+        #f7e8bb;
+
+}
+
+
+.status-header {
+
+    font-family:
+        "DM Mono";
+
+    font-size:
+        10px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        8px;
+
+}
+
+
+.live-indicator {
+
+    width:
+        8px;
+
+    height:
+        8px;
+
+    border-radius:
+        50%;
+
+    background:
+        var(--coral);
+
+    animation:
+        blinkStatus .8s infinite;
+
+}
+
+
+.status-text {
+
+    margin-top:
+        8px;
+
+    font-size:
+        13px;
+
+}
+
+
+.loading-track {
+
+    height:
+        8px;
+
+    margin-top:
+        12px;
+
+    border:
+        2px solid var(--border);
+
+    overflow:
+        hidden;
+
+    opacity:
+        0;
+
+}
+
+
+.loading-track.active {
+
+    opacity:
+        1;
+
+}
+
+
+.loading-bar {
+
+    height:
+        100%;
+
+    width:
+        35%;
+
+    background:
+        var(--teal);
+
+    animation:
+        loadingMove 1s linear infinite;
+
+}
+
+
+@keyframes loadingMove {
+
+    from {
+
+        transform:
+            translateX(-120%);
+
+    }
+
+    to {
+
+        transform:
+            translateX(350%);
+
+    }
+
+}
+
+
+/* TERMINAL */
+
+.mini-terminal {
+
+    margin-top:
+        20px;
+
+    background:
+        #19373c;
+
+    border:
+        3px solid var(--border);
+
+    font-family:
+        "DM Mono";
+
+    color:
+        #c7f6d8;
+
+}
+
+
+.terminal-header {
+
+    background:
+        #ead7b7;
+
+    color:
+        var(--ink);
+
+    padding:
+        8px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        6px;
+
+    font-size:
+        10px;
+
+}
+
+
+.terminal-header span {
+
+    width:
+        9px;
+
+    height:
+        9px;
+
+    border-radius:
+        50%;
+
+    background:
+        var(--coral);
+
+}
+
+
+.terminal-header span:nth-child(2) {
+    background:
+        var(--yellow);
+}
+
+
+.terminal-header span:nth-child(3) {
+    background:
+        var(--green);
+}
+
+
+.terminal-header strong {
+
+    margin-left:
+        8px;
+
+}
+
+
+.terminal-body {
+
+    max-height:
+        145px;
+
+    overflow-y:
+        auto;
+
+    padding:
+        12px;
+
+    font-size:
+        10px;
+
+}
+
+
+.terminal-body p {
+
+    margin-bottom:
+        7px;
+
+}
+
+
+.terminal-body p span {
+
+    color:
+        var(--yellow);
+
+}
+
+
+/* VEHICULOS */
+
+.vehicle-section {
+
+    margin-top:
+        30px;
+
+}
+
+
+.section-heading {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        14px;
+
+    margin-bottom:
+        15px;
+
+    font-family:
+        "DM Mono";
+
+    font-size:
+        11px;
+
+}
+
+
+.pixel-line {
+
+    flex:
+        1;
+
+    height:
+        3px;
+
+    background:
+        repeating-linear-gradient(
+            90deg,
+            var(--border) 0,
+            var(--border) 10px,
+            transparent 10px,
+            transparent 17px
+        );
+
+}
+
+
+.vehicle-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(5, 1fr);
+
+    gap:
+        10px;
+
+}
+
+
+.vehicle-card {
+
+    border:
+        3px solid var(--border);
+
+    padding:
+        12px;
+
+    text-align:
+        center;
+
+    font-family:
+        "DM Mono";
+
+    font-size:
+        11px;
+
+    box-shadow:
+        3px 3px 0 var(--border);
+
+    animation:
+        cardEnter .3s ease;
+
+}
+
+
+@keyframes cardEnter {
+
+    from {
+
+        opacity:
+            0;
+
+        transform:
+            translateY(12px)
+            rotate(2deg);
+
+    }
+
+}
+
+
+.vehicle-card.DENTRO {
+
+    background:
+        #a8dbc3;
+
+}
+
+
+.vehicle-card.ESPERANDO {
+
+    background:
+        #f4d783;
+
+    animation:
+        waitingCard .9s infinite alternate;
+
+}
+
+
+.vehicle-card.FUERA {
+
+    background:
+        #d8d1c2;
+
+    opacity:
+        .65;
+
+}
+
+
+@keyframes waitingCard {
+
+    to {
+
+        transform:
+            translateY(-5px);
+
+    }
+
+}
+
+
+.empty-state {
+
+    grid-column:
+        1 / -1;
+
+    text-align:
+        center;
+
+    border:
+        3px dashed var(--border);
+
+    padding:
+        25px;
+
+}
+
+
+.empty-car {
+
+    font-size:
+        30px;
+
+    margin-bottom:
+        8px;
+
+}
+
+
+/* OTROS MODULOS */
+
+.other-modules {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap:
+        18px;
+
+    margin-top:
+        35px;
+
+}
+
+
+.retro-card {
+
+    border:
+        3px solid var(--border);
+
+    background:
+        var(--paper);
+
+    padding:
+        25px;
+
+    box-shadow:
+        5px 5px 0 var(--border);
+
+    transition:
+        transform .2s;
+
+}
+
+
+.retro-card:hover {
+
+    transform:
+        translateY(-4px)
+        rotate(-.5deg);
+
+}
+
+
+.retro-card-number {
+
+    font-family:
+        "DM Mono";
+
+    color:
+        var(--coral);
+
+    margin-bottom:
+        10px;
+
+}
+
+
+.retro-card h3 {
+
+    font-size:
+        18px;
+
+}
+
+
+.retro-card p {
+
+    margin-top:
+        8px;
+
+    color:
+        var(--ink-soft);
+
+}
+
+
+.coming-soon {
+
+    display:
+        inline-block;
+
+    margin-top:
+        17px;
+
+    padding:
+        6px 8px;
+
+    background:
+        var(--yellow);
+
+    border:
+        2px solid var(--border);
+
+    font-family:
+        "DM Mono";
+
+    font-size:
+        9px;
+
+}
+
+
+.locked {
+
+    filter:
+        saturate(.7);
+
+}
+
+
+/* FOOTER */
+
+.footer {
+
+    border-top:
+        4px solid var(--border);
+
+    padding:
+        24px 7%;
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    font-family:
+        "DM Mono";
+
+    font-size:
+        10px;
+
+    background:
+        var(--paper);
+
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 950px) {
+
+    .hero {
+
+        grid-template-columns:
+            1fr;
+
+        gap:
+            35px;
+
+    }
+
+
+    .parking-dashboard {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .parking-lot {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+
+    .vehicle-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .topbar {
+
+        flex-direction:
+            column;
+
+        align-items:
+            flex-start;
+
+        gap:
+            15px;
+
+    }
+
+
+    .module-heading {
+
+        flex-wrap:
+            wrap;
+
+    }
+
+
+    .parking-lot {
+
+        grid-template-columns:
+            1fr 1fr;
+
+    }
+
+
+    .counter-grid {
+
+        grid-template-columns:
+            1fr 1fr;
+
+    }
+
+
+    .other-modules {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .vehicle-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .footer {
+
+        flex-direction:
+            column;
+
+        gap:
+            10px;
+
+    }
+
+}

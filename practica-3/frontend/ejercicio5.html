@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 5 · Centro de impresión</title>
+    <!-- Hojas de estilo oficiales de tu grupo -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/sincronizacion.css">
+</head>
+<body>
+
+    <div class="noise"></div>
+
+    <!-- CABECERA RETRO IDÉNTICA -->
+    <header class="topbar">
+        <div class="brand-block">
+            <div class="brand-symbol">SD</div>
+            <div>
+                <h1>SISTEMAS DISTRIBUIDOS</h1>
+                <p>Práctica 03 · Ejercicio 5 · Centro de impresión</p>
+            </div>
+        </div>
+        <a class="volver" href="index.html">← VOLVER AL INICIO</a>
+    </header>
+
+    <main class="contenedor">
+
+        <!-- MÓDULO 05 CON ESTILO DE TU GRUPO -->
+        <section class="module" id="centro-impresion">
+
+            <div class="module-heading">
+                <div class="module-number numero-amarillo">05</div>
+                <div class="module-title">
+                    <span class="eyebrow">PATRÓN COMMAND · SEMÁFOROS</span>
+                    <h2>EJERCICIO 5 · CENTRO DE IMPRESIÓN</h2>
+                    <p>Las etapas deben cumplirse obligatoriamente en el orden: Diseño → Revisión → Impresión.</p>
+                </div>
+                <div class="service-badge">
+                    <span class="service-light" id="service-light-impresion" style="background-color: #22c55e;"></span>
+                    IMPRESION-SERVICE
+                </div>
+            </div>
+
+            <!-- Dashboard de Trabajo con Grid Oficial -->
+            <div class="parking-dashboard">
+
+                <!-- Área Visual Izquierda: Pipeline de Semáforos -->
+                <div class="parking-visual">
+                    <div class="panel-title">ESTADO DEL PIPELINE</div>
+
+                    <div class="puente-escena" style="display: flex; justify-content: space-around; align-items: center; padding: 20px 10px;">
+                        <div id="led-diseno" class="counter-card" style="width: 30%; border: 3px solid #000; background: #fff; border-radius: 0;">
+                            <span style="font-size: 1.3rem; display: block; margin-bottom: 5px;">🎨</span>
+                            <span class="counter-label" style="font-weight: bold; color: #000;">DISEÑO</span>
+                            <span id="txt-diseno" class="counter-value" style="font-size: 1.1rem; display: block; margin-top: 5px;">Espera</span>
+                        </div>
+                        
+                        <div id="led-revision" class="counter-card" style="width: 30%; border: 3px solid #000; background: #fff; border-radius: 0;">
+                            <span style="font-size: 1.3rem; display: block; margin-bottom: 5px;">🔍</span>
+                            <span class="counter-label" style="font-weight: bold; color: #000;">REVISIÓN</span>
+                            <span id="txt-revision" class="counter-value" style="font-size: 1.1rem; display: block; margin-top: 5px;">Bloqueado</span>
+                        </div>
+                        
+                        <div id="led-impresion" class="counter-card" style="width: 30%; border: 3px solid #000; background: #fff; border-radius: 0;">
+                            <span style="font-size: 1.3rem; display: block; margin-bottom: 5px;">🖨️</span>
+                            <span class="counter-label" style="font-weight: bold; color: #000;">IMPRESIÓN</span>
+                            <span id="txt-impresion" class="counter-value" style="font-size: 1.1rem; display: block; margin-top: 5px;">Bloqueado</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panel de Control Derecho -->
+                <div class="control-panel">
+                    <div class="panel-title">CONTROL PANEL</div>
+
+                    <!-- Cuadrícula de Contadores Oficial -->
+                    <div class="counter-grid">
+                        <div class="counter-card coral">
+                            <span class="counter-label">ETAPA ACTUAL</span>
+                            <span id="txt-etapa-activa" class="counter-value texto" style="font-size: 1.2rem;">STANDBY</span>
+                        </div>
+                        <div class="counter-card teal">
+                            <span class="counter-label">DOCUMENTOS</span>
+                            <span id="txt-docs-procesados" class="counter-value">0 / 3</span>
+                        </div>
+                    </div>
+
+                    <!-- Botones con Estilo Arcade del Grupo -->
+                    <div class="arcade-actions" style="margin-top: 15px; margin-bottom: 15px;">
+                        <button id="btn-start-impresion" onclick="lanzarHilosImpresion()" class="arcade-btn primary-btn">
+                            <span class="btn-icon">▶</span> INICIAR SIMULACIÓN
+                        </button>
+                    </div>
+
+                    <div class="system-status">
+                        <div class="status-header"><span class="live-indicator" style="background-color: #eab308;"></span> LIVE STATUS</div>
+                        <div id="status-text-core" class="status-text">Microservicio conectado (Puerto 8085)</div>
+                    </div>
+
+                    <!-- Mini Terminal Oficial (EVENT LOG) -->
+                    <div class="mini-terminal">
+                        <div class="terminal-header">
+                            <span></span><span></span><span></span>
+                            <strong>EVENT LOG</strong>
+                        </div>
+                        <div id="consola-impresion-stream" class="terminal-body">
+                            <p><span>SYS</span> Sistema preparado. Presione INICIAR...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección Inferior de Criterio de Verificación -->
+            <div class="vehicle-section">
+                <div class="section-heading">
+                    <span>VERIFICACIÓN DEL SÍLABO</span>
+                    <div class="pixel-line"></div>
+                </div>
+                <div class="verificacion" id="txt-verificacion-impresion">
+                    Inicia la simulación para comprobar si se cumple la secuencia estricta: Diseño → Revisión → Impresión sin condiciones de carrera.
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <footer class="footer">
+        <span>UNIVERSIDAD NACIONAL DE LOJA</span>
+        <span>SISTEMAS DISTRIBUIDOS · 2026</span>
+    </footer>
+
+    <!-- Enrutador lógico tradicional -->
+    <script src="js/config.js"></script>
+    <script src="js/centro_impresion.js"></script>
+</body>
+</html>

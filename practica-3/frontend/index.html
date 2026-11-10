@@ -1,0 +1,460 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Práctica 3 · Sistemas Distribuidos</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+    <div class="noise"></div>
+
+    <!-- Cabecera retro -->
+    <header class="topbar">
+
+        <div class="brand-block">
+            <div class="brand-symbol">SD</div>
+
+            <div>
+                <h1>SISTEMAS DISTRIBUIDOS</h1>
+                <p>Práctica 03 · Sincronización de procesos</p>
+            </div>
+        </div>
+
+        <div class="topbar-status">
+            <span class="status-dot"></span>
+            SISTEMA ONLINE
+        </div>
+
+    </header>
+
+    <!-- Banner principal -->
+    <section class="hero">
+
+        <div class="hero-copy">
+
+            <span class="hero-label">
+                SIMULADOR DE CONCURRENCIA
+            </span>
+
+            <h2>
+                Procesos que compiten.<br>
+                Recursos que deben coordinarse.
+            </h2>
+
+            <p>
+                Visualización interactiva de semáforos, exclusión mutua
+                y sincronización mediante microservicios.
+            </p>
+
+        </div>
+
+        <div class="hero-decoration">
+
+            <div class="arcade-screen">
+
+                <div class="screen-title">
+                    DISTRIBUTED SYSTEMS
+                </div>
+
+                <div class="screen-line">
+                    &gt; initializing services...
+                </div>
+
+                <div class="screen-line">
+                    &gt; concurrency engine ready
+                </div>
+
+                <div class="screen-line blinking">
+                    &gt; waiting for simulation_
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <main class="contenedor">
+
+        <!-- Ejercicio 1: Estacionamiento -->
+        <section class="module parking-module" id="estacionamiento">
+
+            <div class="module-heading">
+
+                <div class="module-number">
+                    01
+                </div>
+
+                <div class="module-title">
+
+                    <span class="eyebrow">
+                        SEMÁFORO CONTADOR
+                    </span>
+
+                    <h2>
+                        PARKING CONTROL
+                    </h2>
+
+                    <p>
+                        Capacidad máxima: cuatro vehículos concurrentes.
+                    </p>
+
+                </div>
+
+                <div class="service-badge">
+                    <span class="service-light"></span>
+                    MICRO-SERVICE
+                </div>
+
+            </div>
+
+            <!-- Panel principal -->
+            <div class="parking-dashboard">
+
+                <!-- Visualización del estacionamiento -->
+                <div class="parking-visual">
+
+                    <div class="panel-title">
+                        ESTACIONAMIENTO
+                    </div>
+
+                    <!-- Carretera -->
+                    <div class="road">
+
+                        <div class="road-lines"></div>
+
+                        <div class="road-sign">
+                            ENTRADA
+                        </div>
+
+                        <div
+                            id="carritoEntrada"
+                            class="moving-car hidden"
+                        >
+                            <div class="car-window"></div>
+                            <div class="car-wheel wheel-left"></div>
+                            <div class="car-wheel wheel-right"></div>
+                        </div>
+
+                    </div>
+
+                    <!-- Plazas disponibles -->
+                    <div class="parking-lot">
+
+                        <div class="parking-slot" id="slot-1">
+                            <div class="slot-number">P1</div>
+                            <div class="slot-content"></div>
+                        </div>
+
+                        <div class="parking-slot" id="slot-2">
+                            <div class="slot-number">P2</div>
+                            <div class="slot-content"></div>
+                        </div>
+
+                        <div class="parking-slot" id="slot-3">
+                            <div class="slot-number">P3</div>
+                            <div class="slot-content"></div>
+                        </div>
+
+                        <div class="parking-slot" id="slot-4">
+                            <div class="slot-number">P4</div>
+                            <div class="slot-content"></div>
+                        </div>
+
+                    </div>
+
+                    <!-- Cola de espera -->
+                    <div class="queue-area">
+
+                        <div class="queue-label">
+                            COLA DE ESPERA
+                        </div>
+
+                        <div id="colaVehiculos" class="queue-track">
+
+                            <span class="queue-empty">
+                                Sin vehículos esperando
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Panel de control -->
+                <div class="control-panel">
+
+                    <div class="panel-title">
+                        CONTROL PANEL
+                    </div>
+
+                    <div class="counter-grid">
+
+                        <div class="counter-card coral">
+                            <span class="counter-label">
+                                CAPACIDAD
+                            </span>
+
+                            <span id="capacidad" class="counter-value">
+                                4
+                            </span>
+                        </div>
+
+                        <div class="counter-card teal">
+                            <span class="counter-label">
+                                OCUPADOS
+                            </span>
+
+                            <span id="ocupados" class="counter-value">
+                                0
+                            </span>
+                        </div>
+
+                        <div class="counter-card yellow">
+                            <span class="counter-label">
+                                DISPONIBLES
+                            </span>
+
+                            <span id="disponibles" class="counter-value">
+                                4
+                            </span>
+                        </div>
+
+                        <div class="counter-card pink">
+                            <span class="counter-label">
+                                ESPERANDO
+                            </span>
+
+                            <span id="esperando" class="counter-value">
+                                0
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <!-- Acciones -->
+                    <div class="arcade-actions">
+
+                        <button
+                            id="btnSimular"
+                            class="arcade-btn primary-btn"
+                        >
+                            <span class="btn-icon">▶</span>
+                            INICIAR SIMULACIÓN
+                        </button>
+
+                        <button
+                            id="btnActualizar"
+                            class="arcade-btn secondary-btn"
+                        >
+                            <span class="btn-icon">↻</span>
+                            ACTUALIZAR
+                        </button>
+
+                    </div>
+
+                    <!-- Estado del sistema -->
+                    <div class="system-status">
+
+                        <div class="status-header">
+                            <span class="live-indicator"></span>
+                            LIVE STATUS
+                        </div>
+
+                        <div id="textoEstado" class="status-text">
+                            Microservicio conectado
+                        </div>
+
+                        <div
+                            id="progresoSimulacion"
+                            class="loading-track"
+                        >
+                            <div class="loading-bar"></div>
+                        </div>
+
+                    </div>
+
+                    <!-- Registro de eventos -->
+                    <div class="mini-terminal">
+
+                        <div class="terminal-header">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+
+                            <strong>EVENT LOG</strong>
+                        </div>
+
+                        <div id="eventLog" class="terminal-body">
+
+                            <p>
+                                <span>SYS</span>
+                                Sistema preparado.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Estado de los vehículos -->
+            <div class="vehicle-section">
+
+                <div class="section-heading">
+                    <span>VEHÍCULOS</span>
+                    <div class="pixel-line"></div>
+                </div>
+
+                <div id="listaVehiculos" class="vehicle-grid">
+
+                    <div class="empty-state">
+
+                        <div class="empty-car">▰</div>
+
+                        <p>
+                            Presiona iniciar para comenzar la simulación.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Otros módulos -->
+        <section class="other-modules">
+
+            <!-- Ejercicio 2: Cajero automático -->
+            <article class="retro-card" id="cajero">
+
+                <div class="retro-card-number">
+                    02
+                </div>
+
+                <h3>
+                    CAJERO AUTOMÁTICO
+                </h3>
+
+                <p>
+                    Exclusión mutua sobre saldo compartido.
+                    Simulación de operaciones bancarias con y sin mutex.
+                </p>
+
+                <a
+                    class="coming-soon"
+                    href="ejercicio2.html"
+                    style="text-decoration: none; background: var(--teal); color: white;"
+                >
+                    ABRIR EJERCICIO 2 →
+                </a>
+
+            </article>
+
+            <!-- Ejercicio 3: Productor-Consumidor -->
+            <article class="retro-card">
+
+                <div class="retro-card-number">
+                    03
+                </div>
+
+                <h3>
+                    PRODUCTOR / CONSUMIDOR
+                </h3>
+
+                <p>
+                    Buffer limitado y sincronización.
+                </p>
+
+                <a
+                    class="coming-soon"
+                    href="ejercicio3.html"
+                    style="text-decoration: none; background: var(--teal); color: white;"
+                >
+                    ABRIR EJERCICIO 3 →
+                </a>
+
+            </article>
+
+            <!-- Ejercicio 4: Cruce de vehículos -->
+            <article class="retro-card">
+
+                <div class="retro-card-number">
+                    04
+                </div>
+
+                <h3>
+                    CRUCE DE VEHÍCULOS
+                </h3>
+
+                <p>
+                    Circulación concurrente por dirección.
+                </p>
+
+                <a
+                    class="coming-soon"
+                    href="ejercicio4.html"
+                    style="text-decoration: none; background: var(--teal); color: white;"
+                >
+                    ABRIR EJERCICIO 4 →
+                </a>
+
+            </article>
+
+            <!-- Ejercicio 5: Centro de impresión -->
+            <article class="retro-card locked">
+
+                <div class="retro-card-number">
+                    05
+                </div>
+
+                <h3>
+                    CENTRO DE IMPRESIÓN
+                </h3>
+
+                <p>
+                    Diseño → Revisión → Impresión.
+                </p>
+
+                <a
+                    class="coming-soon"
+                    href="ejercicio5.html"
+                    style="text-decoration: none; background: var(--teal); color: white;"
+                >
+                    ABRIR EJERCICIO 5 →
+                </a>
+
+            </article>
+
+        </section>
+
+    </main>
+
+    <!-- Pie de página -->
+    <footer class="footer">
+
+        <span>
+            UNIVERSIDAD NACIONAL DE LOJA
+        </span>
+
+        <span>
+            SISTEMAS DISTRIBUIDOS · 2026
+        </span>
+
+    </footer>
+
+    <script type="module" src="js/app.js"></script>
+
+</body>
+</html>

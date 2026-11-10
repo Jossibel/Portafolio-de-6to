@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6eddd">
+  <title>SyncLab · Cajero automático</title>
+  <link rel="stylesheet" href="css/cajero.css">
+</head>
+<body>
+  <div class="paper-texture" aria-hidden="true"></div>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Regresar a SyncLab">
+      <span class="brand-stamp">SD<span class="brand-spark">✳</span></span>
+      <span><strong>SYNCLAB</strong><small>SISTEMAS DISTRIBUIDOS / UNL</small></span>
+    </a>
+    <div class="header-right"><span class="chapter">EJERCICIO <b>02</b> / 05</span><a class="back-link" href="index.html">← VOLVER AL INICIO</a></div>
+  </header>
+
+  <main class="layout">
+    <section class="intro">
+      <div class="intro-copy">
+        <span class="eyebrow"><span class="tiny-star">✳</span> LABORATORIO DE CONCURRENCIA</span>
+        <h1>CAJERO<span class="outline">//</span><br><em>COMPARTIDO</em></h1>
+        <p>Tres procesos. Una cuenta. Un recurso compartido. Comprueba cómo la exclusión mutua evita que las operaciones bancarias se sobrescriban.</p>
+        <div class="chips"><span>JAVA 17</span><span>SPRING BOOT</span><span>MUTEX / LOCK</span><span>3 HILOS</span></div>
+      </div>
+      <div class="atm-art" aria-hidden="true">
+        <div class="sun"></div><div class="rays"></div>
+        <div class="atm-housing"><div class="atm-top"><span>★ BANK//02</span><span>◎</span></div><div class="atm-display"><div class="atm-display-label">SALDO SEGURO</div><div class="atm-display-num">$650<span class="cursor">_</span></div><div class="atm-display-bars">▮▮▮▮▮▯▯</div></div><div class="atm-slot"></div><div class="atm-pad"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="atm-base"></div></div>
+        <div class="coin coin-one">$</div><div class="coin coin-two">$</div>
+      </div>
+    </section>
+
+    <div class="ticker" aria-hidden="true"><div class="ticker-track">◈ SINCRONIZACIÓN &nbsp; ◈ EXCLUSIÓN MUTUA &nbsp; ◈ CONDICIONES DE CARRERA &nbsp; ◈ RECURSOS COMPARTIDOS &nbsp; ◈ SINCRONIZACIÓN &nbsp; ◈ EXCLUSIÓN MUTUA &nbsp; ◈ CONDICIONES DE CARRERA &nbsp; ◈ RECURSOS COMPARTIDOS &nbsp;</div></div>
+
+    <section class="lab" aria-label="Simulador del cajero">
+      <div class="lab-heading"><div><span class="section-index">01 / PANEL DE CONTROL</span><h2>La caja de pruebas<span class="asterisk">*</span></h2></div><span id="connectionStatus" class="connection checking" role="status"><span class="connection-light"></span>COMPROBANDO SERVICIO</span></div>
+      <div class="workspace">
+        <div class="left-stack">
+          <article class="balance-card">
+            <div class="balance-top"><span>CUENTA COMPARTIDA</span><span>REF. 0001-APE03</span></div>
+            <div class="balance-label">SALDO DEL CAJERO CON MUTEX</div><div id="saldo" class="balance-amount" aria-live="polite">$1,000.00</div>
+            <div class="balance-bottom"><span>INICIAL: $1,000.00</span><span id="balanceHint">LISTO PARA SIMULAR</span></div>
+            <div class="card-stripe" aria-hidden="true"></div>
+          </article>
+          <article class="process-panel">
+            <div class="panel-heading"><h3>OPERACIONES</h3><span>03 PROCESOS</span></div>
+            <div id="processList" class="process-list">
+              <div class="process-row" data-id="1"><span class="process-icon withdrawal">↗</span><div class="process-info"><strong>PROCESO 01</strong><small>RETIRO · $300</small></div><span class="process-state" data-state="PENDIENTE">PENDIENTE</span></div>
+              <div class="process-row" data-id="2"><span class="process-icon withdrawal">↗</span><div class="process-info"><strong>PROCESO 02</strong><small>RETIRO · $250</small></div><span class="process-state" data-state="PENDIENTE">PENDIENTE</span></div>
+              <div class="process-row" data-id="3"><span class="process-icon deposit">↙</span><div class="process-info"><strong>PROCESO 03</strong><small>DEPÓSITO · $200</small></div><span class="process-state" data-state="PENDIENTE">PENDIENTE</span></div>
+            </div>
+            <p class="note">Los estados se actualizan con las respuestas del backend. La secuencia animada posterior es una reproducción didáctica, no una transmisión en vivo del lock.</p>
+          </article>
+        </div>
+        <div class="right-stack">
+          <article class="run-card"><span class="section-index">02 / PRUEBAS</span><h3>¿QUÉ PASA SI<br><em>QUITAMOS</em> EL LOCK?</h3><p>Ejecuta las dos versiones en Java y compara sus resultados reales.</p>
+            <button class="run-btn mutex" id="btnMutex"><span class="run-btn-icon">▣</span><span>SIMULAR CON MUTEX<small>Protección de sección crítica</small></span><span class="btn-arrow">↗</span></button>
+            <button class="run-btn unsafe" id="btnSinMutex"><span class="run-btn-icon">⚡</span><span>SIMULAR SIN MUTEX<small>Demostración de condición de carrera</small></span><span class="btn-arrow">↗</span></button>
+            <button id="btnComparar" class="compare-btn">COMPARAR AMBAS EJECUCIONES <span>→</span></button>
+            <p id="actionStatus" class="action-status" role="status" aria-live="polite">Selecciona una prueba para comenzar.</p>
+          </article>
+          <article class="mutex-visual"><div class="panel-heading"><h3>RECURSO COMPARTIDO</h3><span>ReentrantLock</span></div><div class="lock-diagram"><span class="thread thread-a">T1</span><span class="thread thread-b">T2</span><span class="thread thread-c">T3</span><span class="link-line" aria-hidden="true"></span><div id="lockSymbol" class="lock-symbol" aria-hidden="true">♙</div><div class="shared-resource">$ SALDO</div></div><div id="lockCaption" class="lock-caption">El mutex permite un único acceso a la sección crítica por vez.</div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="results" aria-label="Comparación de resultados"><div class="section-row"><div><span class="section-index">03 / RESULTADOS</span><h2>¿Coinciden las cuentas?</h2></div><span class="expected">RESULTADO ESPERADO <b>$650.00</b></span></div>
+      <div class="result-grid"><article class="result-card safe"><div class="result-title"><span>● CON MUTEX</span><span>SEGURO</span></div><div id="resultadoMutex" class="result-value">—</div><p id="detalleMutex">Aún no se ha ejecutado esta prueba.</p><div class="result-bottom">EXCLUSIÓN MUTUA ACTIVA <span>✦</span></div></article>
+      <article class="result-card risk"><div class="result-title"><span>● SIN MUTEX</span><span>RIESGO</span></div><div id="resultadoSinMutex" class="result-value">—</div><p id="detalleSinMutex">Aún no se ha ejecutado esta prueba.</p><div class="result-bottom">ACCESO NO SINCRONIZADO <span>⚡</span></div></article></div>
+      <p class="evidence-note">La prueba sin mutex utiliza una pausa de demostración que favorece la intercalación de lecturas y escrituras. El resultado puede variar entre ejecuciones.</p>
+    </section>
+    <section class="console-section"><div class="section-row"><div><span class="section-index">04 / REGISTRO</span><h2>Consola de eventos</h2></div><button id="btnLimpiarLog" class="clear-log">BORRAR REGISTRO ↗</button></div><div class="console"><div class="console-header"><span class="dots"><i></i><i></i><i></i></span><span>cajero-service · localhost:8082</span><span>SYS.LOG</span></div><div id="eventLog" class="console-log" aria-live="polite"><p><time>--:--:--</time><span>SYS</span> Simulador listo para conectar.</p></div></div></section>
+  </main>
+  <footer><span>UNIVERSIDAD NACIONAL DE LOJA · SISTEMAS DISTRIBUIDOS</span><span>SYNC LAB / EJERCICIO 02</span></footer>
+  <script type="module" src="js/cajero.js"></script>
+</body>
+</html>
